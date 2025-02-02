@@ -1,0 +1,19 @@
+services:
+  quarkus_db:
+    image: postgres:latest
+    container_name: quarkus_db
+    environment:
+      POSTGRES_DB: quarkus_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      PG_DATA: /data/postgres
+    networks:
+      - quarkus
+
+    ports:
+      - "5432:5432"
+
+
+networks:
+  quarkus:
+    driver: bridge
