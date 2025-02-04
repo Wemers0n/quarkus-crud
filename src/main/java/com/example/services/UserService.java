@@ -3,6 +3,7 @@ package com.example.services;
 import java.util.List;
 import java.util.UUID;
 
+import com.example.exception.UserNotFoundException;
 import com.example.model.User;
 
 import jakarta.enterprise.context.ApplicationScoped;
@@ -18,7 +19,7 @@ public class UserService {
     }
 
     public User findUser(UUID id){
-        return User.findById(id);
+        return (User) User.findByIdOptional(id).orElseThrow(() -> new UserNotFoundException("User does not exist"));
     }
 
     public List<User> findAll(Integer page, Integer pageSize){
