@@ -6,6 +6,7 @@ import com.example.model.User;
 import com.example.services.UserService;
 
 import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.DefaultValue;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -45,6 +46,13 @@ public class UserController {
     @POST
     public Response createUser(User user){
         return Response.ok(service.save(user)).build();
+    }
+
+    @DELETE
+    @Path("/{id}")
+    public Response deleteUser(@PathParam("id") UUID id){
+        this.service.deleteUser(id);
+        return Response.noContent().build();
     }
 
 }

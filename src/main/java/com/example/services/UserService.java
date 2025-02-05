@@ -25,4 +25,12 @@ public class UserService {
     public List<User> findAll(Integer page, Integer pageSize){
         return User.findAll().page(page, pageSize).list();
     }
+
+    @Transactional
+    public void deleteUser(UUID id){
+        var deleted = User.deleteById(id);
+        if(!deleted){
+            throw new UserNotFoundException("Failed to delete, user does not exist.");
+        }
+    }
 }
